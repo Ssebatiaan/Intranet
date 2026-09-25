@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Comunicado
+from .models import Comunicado, EnlaceSitio, ImagenGaleria
 
 
 @admin.register(Comunicado)
@@ -14,3 +14,15 @@ class ComunicadoAdmin(admin.ModelAdmin):
         if not obj.autor_id:
             obj.autor = request.user
         super().save_model(request, obj, form, change)
+
+
+@admin.register(EnlaceSitio)
+class EnlaceSitioAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'url', 'orden', 'activo')
+    list_editable = ('orden', 'activo')
+
+
+@admin.register(ImagenGaleria)
+class ImagenGaleriaAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'imagen', 'orden')
+    list_editable = ('orden',)

@@ -6,12 +6,25 @@ empezar a agregar funcionalidad.
 ## ¿Qué trae ya funcionando?
 
 - Login / logout de usuarios (`/login/`, `/logout/`)
-- Página de inicio protegida (`/`) que lista **comunicados**
+- Página de inicio tipo portal (`/`), organizada en paneles:
+  - **Enlaces del sitio** (columna izquierda) — accesos rápidos, modelo `EnlaceSitio`
+  - **Para ti** (columna izquierda) — el comunicado más reciente de categoría
+    "Para ti" (beneficios, promociones)
+  - **Vista previa de imágenes** (columna central) — miniaturas, modelo `ImagenGaleria`
+  - **Lo nuevo** (columna central) — el comunicado destacado + una lista de los
+    siguientes más recientes
+  - Panel de sitio externo embebido (columna derecha) — configurable con
+    `SITIO_EXTERNO_NOMBRE` / `SITIO_EXTERNO_URL` en `config/settings.py`
 - Detalle de cada comunicado (`/comunicados/<id>/`)
-- Panel de administración de Django (`/admin/`) para crear comunicados sin
-  necesidad de código
+- Panel de administración de Django (`/admin/`) para gestionar comunicados,
+  enlaces e imágenes sin necesidad de código
 - Diseño propio (tipografía Fraunces + Work Sans, paleta personalizada) en
   `static/css/base.css`
+
+Los enlaces "Mis ficheros", "Ficheros compartidos", "Tareas", "Personas",
+"Foros" y "Calendario" de la barra de navegación son marcadores de posición
+(`href="#"`) para cuando se construyan esas secciones — no dan error, solo no
+llevan a ningún lado todavía.
 
 ## Estructura del proyecto
 

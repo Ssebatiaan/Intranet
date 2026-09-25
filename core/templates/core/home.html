@@ -1,26 +1,88 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}Inicio · Intranet{% endblock %}
 
 {% block content %}
-  <h1 class="page-title">Comunicados</h1>
-  <p class="page-subtitle">Últimos avisos y noticias de la organización.</p>
+<div class="home-grid">
 
-  {% if comunicados %}
-    {% for c in comunicados %}
-      <article class="comunicado-item {% if c.fijado %}fijado{% endif %}">
-        <h2><a href="{% url 'comunicado_detalle' c.pk %}">{{ c.titulo }}</a></h2>
-        <p class="comunicado-meta">
-          {% if c.fijado %}<span class="badge-pin">Fijado</span> · {% endif %}
-          {{ c.get_categoria_display }} · {{ c.autor|default:"Sin autor" }} · {{ c.creado_en|date:"d/m/Y" }}
-        </p>
-        <p class="comunicado-excerpt">{{ c.contenido|truncatewords:28 }}</p>
-      </article>
-    {% endfor %}
-  {% else %}
-    <div class="empty-state">
-      <p>Todavía no hay comunicados publicados.</p>
-      <p>Entra al <a href="/admin/">panel de administración</a> para crear el primero.</p>
-    </div>
-  {% endif %}
+  <aside class="col-left">
+    <section class="panel">
+      <h2 class="panel-title">Enlaces del sitio</h2>
+      {% if enlaces %}
+        <ul class="link-list">
+          {% for enlace in enlaces %}
+            <li><a href="{{ enlace.url }}">{{ enlace.titulo }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="panel-empty">Agrega enlaces desde el admin (modelo "Enlace del sitio").</p>
+      {% endif %}
+    </section>
+
+    {% if para_ti %}
+    <section class="panel panel-accent">
+      <h2 class="panel-title">Para ti</h2>
+      <p class="para-ti-titulo">{{ para_ti.titulo }}</p>
+      <p class="para-ti-cuerpo">{{ para_ti.contenido|linebreaksbr }}</p>
+    </section>
+    {% endif %}
+  </aside>
+
+  <section class="col-center">
+    <section class="panel">
+      <h2 class="panel-title">Vista previa de imágenes</h2>
+      {% if imagenes %}
+        <div class="gallery">
+          {% for img in imagenes %}
+            <img src="{{ img.imagen.url }}" alt="{{ img.titulo }}">
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="panel-empty">Sube imágenes desde el admin (modelo "Imagen de galería").</p>
+      {% endif %}
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">Lo nuevo</h2>
+      {% if destacado %}
+        <article class="wiki-destacado">
+          <h3><a href="{% url 'comunicado_detalle' destacado.pk %}">{{ destacado.titulo }}</a></h3>
+          <p class="comunicado-meta">
+            {{ destacado.get_categoria_display }} · {{ destacado.autor|default:"Sin autor" }} · {{ destacado.creado_en|date:"d/m/Y" }}
+          </p>
+          <div class="wiki-cuerpo">{{ destacado.contenido|linebreaks }}</div>
+        </article>
+      {% else %}
+        <div class="empty-state">
+          <p>Todavía no hay comunicados publicados.</p>
+          <p>Entra al <a href="/admin/">panel de administración</a> para crear el primero.</p>
+        </div>
+      {% endif %}
+
+      {% if noticias %}
+        <ul class="noticias-list">
+          {% for c in noticias %}
+            <li>
+              <a href="{% url 'comunicado_detalle' c.pk %}">{{ c.titulo }}</a>
+              <span class="comunicado-meta">{{ c.creado_en|date:"d/m/Y" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </section>
+  </section>
+
+  <aside class="col-right">
+    <section class="panel">
+      <h2 class="panel-title">{{ sitio_externo_nombre }}</h2>
+      {% if sitio_externo_url %}
+        <iframe class="sitio-embed" src="{{ sitio_externo_url }}" loading="lazy"></iframe>
+      {% else %}
+        <p class="panel-empty">Configura SITIO_EXTERNO_URL en settings.py para mostrar aquí un sitio embebido.</p>
+      {% endif %}
+    </section>
+  </aside>
+
+</div>
 {% endblock %}

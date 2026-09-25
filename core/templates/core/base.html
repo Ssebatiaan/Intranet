@@ -11,21 +11,37 @@
 </head>
 <body>
   {% if user.is_authenticated %}
-  <header class="navbar-intranet">
-    <div class="page" style="display:flex; align-items:center; justify-content:space-between; padding-top:0; padding-bottom:0;">
+  <header class="topbar">
+    <div class="topbar-inner">
       <a class="brand" href="{% url 'home' %}">Intranet</a>
-      <nav class="nav-links">
-        <span>{{ user.get_username }}</span>
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="btn-intranet" style="padding:0.35rem 0.8rem; font-size:0.85rem; margin-left:1rem;">Salir</button>
-        </form>
+      <nav class="top-links">
+        <a href="{% url 'home' %}" class="active">Inicio</a>
+        <a href="#">Mis ficheros</a>
+        <a href="#">Ficheros compartidos</a>
+        <a href="#">Tareas</a>
+        <a href="#">Personas</a>
       </nav>
+      <div class="top-user">
+        <span>{{ user.get_username }}</span>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="link-button">Salir</button>
+        </form>
+      </div>
     </div>
   </header>
+  <nav class="sectionbar">
+    <div class="sectionbar-inner">
+      <a href="{% url 'home' %}" class="active">Noticias y eventos</a>
+      <a href="/admin/">Sistema de gestión</a>
+      <a href="#">Foros</a>
+      <a href="#">Calendario</a>
+      <a href="#">Más</a>
+    </div>
+  </nav>
   {% endif %}
 
-  <main class="page">
+  <main class="{% if user.is_authenticated %}page-wide{% else %}page{% endif %}">
     {% if messages %}
       {% for message in messages %}
         <p>{{ message }}</p>

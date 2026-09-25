@@ -119,6 +119,15 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+# Archivos subidos por los usuarios (ej. imágenes de la galería del home)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Panel "sitio externo" del home (columna derecha). Cambia esto por tu propio
+# sitio, o déjalo en blanco ('') para ocultar el panel.
+SITIO_EXTERNO_NOMBRE = 'Sitio web'
+SITIO_EXTERNO_URL = ''
+
 # Redirige aquí cuando una vista requiere login (@login_required)
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
