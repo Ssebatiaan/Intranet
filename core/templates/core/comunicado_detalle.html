@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ comunicado.titulo }} · Intranet{% endblock %}
+
+{% block content %}
+  <p><a href="{% url 'home' %}">&larr; Volver a comunicados</a></p>
+  <h1 class="page-title">{{ comunicado.titulo }}</h1>
+  <p class="comunicado-meta">
+    {{ comunicado.get_categoria_display }} · {{ comunicado.autor|default:"Sin autor" }} · {{ comunicado.creado_en|date:"d/m/Y H:i" }}
+  </p>
+  <p>{{ comunicado.contenido|linebreaks }}</p>
+{% endblock %}

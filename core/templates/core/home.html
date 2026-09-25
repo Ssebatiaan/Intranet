@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block title %}Inicio · Intranet{% endblock %}
+
+{% block content %}
+  <h1 class="page-title">Comunicados</h1>
+  <p class="page-subtitle">Últimos avisos y noticias de la organización.</p>
+
+  {% if comunicados %}
+    {% for c in comunicados %}
+      <article class="comunicado-item {% if c.fijado %}fijado{% endif %}">
+        <h2><a href="{% url 'comunicado_detalle' c.pk %}">{{ c.titulo }}</a></h2>
+        <p class="comunicado-meta">
+          {% if c.fijado %}<span class="badge-pin">Fijado</span> · {% endif %}
+          {{ c.get_categoria_display }} · {{ c.autor|default:"Sin autor" }} · {{ c.creado_en|date:"d/m/Y" }}
+        </p>
+        <p class="comunicado-excerpt">{{ c.contenido|truncatewords:28 }}</p>
+      </article>
+    {% endfor %}
+  {% else %}
+    <div class="empty-state">
+      <p>Todavía no hay comunicados publicados.</p>
+      <p>Entra al <a href="/admin/">panel de administración</a> para crear el primero.</p>
+    </div>
+  {% endif %}
+{% endblock %}

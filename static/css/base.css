@@ -1,0 +1,148 @@
+:root {
+  --color-bg: #f6f5f1;
+  --color-surface: #ffffff;
+  --color-ink: #1c2333;
+  --color-ink-soft: #565f74;
+  --color-accent: #b8862e;
+  --color-border: #e4e1d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+h1, h2, h3, .brand {
+  font-family: "Fraunces", Georgia, serif;
+  color: var(--color-ink);
+}
+
+a {
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+.navbar-intranet {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 0;
+}
+
+.navbar-intranet .brand {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.navbar-intranet .nav-links a {
+  color: var(--color-ink-soft);
+  margin-left: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.page-title {
+  font-size: 1.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+  color: var(--color-ink-soft);
+  margin-bottom: 2.25rem;
+}
+
+.comunicado-item {
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.5rem 0;
+}
+
+.comunicado-item.fijado {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+}
+
+.comunicado-item h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.35rem;
+}
+
+.comunicado-meta {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 0.6rem;
+}
+
+.comunicado-meta .badge-pin {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.comunicado-excerpt {
+  color: var(--color-ink-soft);
+}
+
+.empty-state {
+  border: 1px dashed var(--color-border);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--color-ink-soft);
+}
+
+.auth-card {
+  max-width: 360px;
+  margin: 4rem auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+}
+
+.btn-intranet {
+  display: inline-block;
+  background-color: var(--color-ink);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  font-family: "Work Sans", sans-serif;
+  cursor: pointer;
+}
+
+.btn-intranet:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 0.3rem;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-family: inherit;
+  font-size: 1rem;
+}
